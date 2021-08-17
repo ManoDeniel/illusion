@@ -1,0 +1,19 @@
+server:
+  port: 8320
+
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521/xe
+    username: system
+    password: a762556A
+    driver-class-name: oracle.jdbc.OracleDriver
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type: TRACE
