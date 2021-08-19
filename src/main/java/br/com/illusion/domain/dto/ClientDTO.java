@@ -25,5 +25,8 @@ public class ClientDTO implements Serializable {
   @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
   private String password;
 
+  @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+  private boolean enabled;
+
   private List<AddressDTO> addresses;
 }

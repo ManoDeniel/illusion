@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.illusion.security.JWTValidateFilter;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
@@ -37,7 +38,7 @@ public class SwaggerConfiguration {
   }
 
   private ApiKey apiKey() {
-    return new ApiKey("AUTHORIZATION", "Authorization", "header");
+    return new ApiKey("JWT", JWTValidateFilter.AUTHORIZATION, "header");
   }
 
   private SecurityContext securityContext() {

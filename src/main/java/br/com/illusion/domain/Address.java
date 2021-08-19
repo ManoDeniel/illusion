@@ -19,7 +19,7 @@ import javax.persistence.Table;
 @lombok.Builder
 @Entity
 @Table(name = "ADDRESS")
-public class Address implements Serializable {
+public class Address extends Domain implements Serializable {
 
   private static final long serialVersionUID = 7572099271139472607L;
 
@@ -53,7 +53,7 @@ public class Address implements Serializable {
 //  private String cityId;
 
   @Column(name = "CLIENT_ID", length = 8, insertable = false, updatable = false)
-  private String clientId;
+  private Long clientId;
 
 //  @OneToOne
 //  @JoinColumn(name = "CITY_ID", referencedColumnName = "ID")

@@ -21,7 +21,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 
 public class JWTValidateFilter extends BasicAuthenticationFilter {
 
-  public static final String HEADER_ATTRIBUTE = "Authorization";
+  public static final String AUTHORIZATION = "Authorization";
 
   public static final String PREFIX = "Bearer ";
 
@@ -34,13 +34,8 @@ public class JWTValidateFilter extends BasicAuthenticationFilter {
       final HttpServletRequest request,
       final HttpServletResponse response,
       final FilterChain chain) throws IOException, ServletException {
-    final String headerAttribute = request.getHeader(HEADER_ATTRIBUTE);
-    if (isNull(headerAttribute)) {
-      chain.doFilter(request, response);
-      return;
-    }
-
-    if (!headerAttribute.startsWith(PREFIX)) {
+    final String headerAttribute = request.getHeader(AUTHORIZATION);
+    if (isNull(headerAttribute) || !headerAttribute.startsWith(PREFIX)) {
       chain.doFilter(request, response);
       return;
     }

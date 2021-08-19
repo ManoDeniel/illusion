@@ -25,10 +25,10 @@ public class Client extends Domain implements Serializable {
 
   @GeneratedValue(
     strategy = GenerationType.SEQUENCE,
-    generator = "SEQ_CLIENTE")
+    generator = "SEQ_CLIENT")
   @SequenceGenerator(
-    name = "SEQ_CLIENTE",
-    sequenceName = "SEQ_CLIENTE",
+    name = "SEQ_CLIENT",
+    sequenceName = "SEQ_CLIENT",
     allocationSize = 1)
   @Id
   @Column(name = "ID", length = 8, nullable = false, updatable = false)
@@ -45,6 +45,9 @@ public class Client extends Domain implements Serializable {
 
   @Column(name = "PASSWORD", length = 70)
   private String password;
+
+  @Column(name = "IS_ENABLED", length = 1)
+  private boolean isEnabled;
 
   @OneToMany(mappedBy = "client")
   private List<Address> Addresses;

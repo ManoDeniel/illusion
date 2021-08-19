@@ -23,7 +23,7 @@ import br.com.illusion.domain.Client;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
-  public static final int TOKEN_EXPIRATION = 600_000;
+  public static final int TOKEN_EXPIRATION = 864_000_000;
 
   // TODO levar para yml
   public static String TOKEN_PASSWORD = "42116312-34c8-422a-8955-f732240092ef";

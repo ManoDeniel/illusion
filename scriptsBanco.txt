@@ -1,0 +1,74 @@
+CREATE SEQUENCE SEQ_CLIENT
+START WITH 1
+INCREMENT BY 1
+MAXVALUE 99999999999999999999
+NOCACHE
+CYCLE;
+
+CREATE TABLE CLIENT (
+    ID                          NUMBER(8)                           NOT NULL,
+    NAME                        VARCHAR2(100)                       NOT NULL,
+    EMAIL                       VARCHAR2(100)                       NOT NULL,
+    USERNAME                    VARCHAR2(40)                        NOT NULL,
+    PASSWORD                    VARCHAR2(70)                        NOT NULL,
+    IS_ENABLED                  NUMBER(1)                           DEFAULT 1                     NOT NULL,
+    CONSTRAINT PK_CLIENT PRIMARY KEY (ID)
+);
+
+CREATE SEQUENCE SEQ_STATE
+START WITH 1
+INCREMENT BY 1
+MAXVALUE 99999999999999999999
+NOCACHE
+CYCLE;
+
+CREATE TABLE STATE (
+    ID                          NUMBER(8)                           NOT NULL,
+    NAME                        VARCHAR2(100)                       NOT NULL,
+    ACRONYM                     VARCHAR2(2)                         NOT NULL,
+    CONSTRAINT PK_STATE PRIMARY KEY (ID)
+);
+
+CREATE SEQUENCE SEQ_CITY
+START WITH 1
+INCREMENT BY 1
+MAXVALUE 99999999999999999999
+NOCACHE
+CYCLE;
+
+CREATE TABLE CITY (
+    ID                          NUMBER(8)                           NOT NULL,
+    NAME                        VARCHAR2(100)                       NOT NULL,
+    STATE_ID                    NUMBER(8)                           NOT NULL,
+    CONSTRAINT PK_CITY PRIMARY KEY (ID),
+    CONSTRAINT FK_CITY_STATE FOREIGN KEY (STATE_ID) REFERENCES STATE (ID)
+);
+
+CREATE TABLE ADDRESS_TYPE (
+    ID                          NUMBER(8)                           NOT NULL,
+    TYPE                        VARCHAR2(50)                        NOT NULL,
+    CONSTRAINT PK_ADDRESS_TYPE PRIMARY KEY (ID)
+);
+
+CREATE SEQUENCE SEQ_ADDRESS
+START WITH 1
+INCREMENT BY 1
+MAXVALUE 99999999999999999999
+NOCACHE
+CYCLE;
+
+CREATE TABLE ADDRESS (
+    ID                          NUMBER(8)                           NOT NULL,
+    STREET                      VARCHAR2(100)                       NOT NULL,
+    ADDRESS_NUMBER              VARCHAR2(10)                        NOT NULL,
+    DISTRICT                    VARCHAR2(80)                        NOT NULL,
+    ZIP_CODE                    VARCHAR2(12)                        NOT NULL,
+    --ADDRESS_TYPE_ID             NUMBER(8)                           NOT NULL,
+    --CITY_ID                     NUMBER(8)                           NOT NULL,
+    CLIENT_ID                   NUMBER(8)                           NOT NULL,
+    CONSTRAINT PK_ADDRESS PRIMARY KEY (ID),
+    --CONSTRAINT FK_ADDRESS_TYPE FOREIGN KEY (ADDRESS_TYPE_ID) REFERENCES ADDRESS_TYPE (ID),
+    --CONSTRAINT FK_ADDRESS_CITY FOREIGN KEY (CITY_ID) REFERENCES CITY (ID),
+    CONSTRAINT FK_ADDRESS_CLIENT FOREIGN KEY (CLIENT_ID) REFERENCES CLIENT (ID)
+);
+

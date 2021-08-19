@@ -1,9 +1,8 @@
 package br.com.illusion.strategy;
 
 import static com.google.common.base.Strings.isNullOrEmpty;
+import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
-
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,7 +22,7 @@ public class ValidateEmail implements Strategy {
       final Client client = (Client) domain;
       return verificarEmail(client);
     }
-    return "Erro interno do sistema!";
+    return "Internal error of system!";
   }
 
   @Override
@@ -33,10 +32,10 @@ public class ValidateEmail implements Strategy {
 
   public String verificarEmail(final Client client) {
     if (!isNullOrEmpty(client.getEmail())) {
-      final Optional<Client> clientEmail = clientDAO.findClientByEmail(client.getEmail());
-      if (clientEmail.isEmpty()) {
+      final Client clientEmail = clientDAO.findClientByEmail(client.getEmail());
+      if (isNull(clientEmail)) {
         return null;
-      } else if (clientEmail.get().getId().equals(client.getId())) {
+      } else if (clientEmail.getId().equals(client.getId())) {
         return null;
       } else {
         return "Email unavailable!";
