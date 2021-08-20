@@ -71,6 +71,11 @@ public class ClientDAO implements UserDetailsService, DAO {
         .orElseThrow(() -> new UsernameNotFoundException(username)));
   }
 
+  public Client findClientByUsername(final String username) {
+    final Client client = Client.builder().username(username).build();
+    return clientRepository.findOne(Example.of(client)).orElse(null);
+  }
+
   public Client findClientByEmail(final String email) {
     final Client client = Client.builder().email(email).build();
     return clientRepository.findOne(Example.of(client)).orElse(null);

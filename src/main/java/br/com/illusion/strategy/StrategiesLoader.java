@@ -15,6 +15,8 @@ public class StrategiesLoader {
 
   @Autowired private ValidateEmail validateEmail;
 
+  @Autowired private ValidateUsername validateUsername;
+
   public Map<String, List<Strategy>> load() {
     final Map<String, List<Strategy>> strategies = new HashMap<>();
 
@@ -25,6 +27,7 @@ public class StrategiesLoader {
   private List<Strategy> loadClient() {
     final List<Strategy> strategies = new ArrayList<>();
     strategies.add(validateEmail);
+    strategies.add(validateUsername);
     return strategies;
   }
 }

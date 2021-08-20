@@ -12,7 +12,7 @@ import br.com.illusion.domain.Client;
 import br.com.illusion.domain.Domain;
 
 @Component
-public class ValidateEmail implements Strategy {
+public class ValidateUsername implements Strategy {
 
   @Autowired private ClientDAO clientDAO;
 
@@ -20,7 +20,7 @@ public class ValidateEmail implements Strategy {
   public String process(final Domain domain) {
     if (checkInstance(domain)) {
       final Client client = (Client) domain;
-      return checkEmail(client);
+      return checkUsername(client);
     }
     return "Internal error of system!";
   }
@@ -30,21 +30,21 @@ public class ValidateEmail implements Strategy {
     return domain instanceof Client;
   }
 
-  public String checkEmail(final Client client) {
-    if (!isNullOrEmpty(client.getEmail())) {
-      final Client clientEmail = clientDAO.findClientByEmail(client.getEmail());
-      if (isNull(clientEmail)) {
+  public String checkUsername(final Client client) {
+    if (!isNullOrEmpty(client.getUsername())) {
+      final Client clientUsername = clientDAO.findClientByUsername(client.getUsername());
+      if (isNull(clientUsername)) {
         return null;
-      } else if (clientEmail.getId().equals(client.getId())) {
+      } else if (clientUsername.getId().equals(client.getId())) {
         return null;
       } else {
-        return "Email unavailable!";
+        return "Username unavailable!";
       }
     } else {
       if (nonNull(client.getId())) {
         return null;
       }
-      return "Email cannot be empty!";
+      return "Username cannot be empty!";
     }
   }
 }

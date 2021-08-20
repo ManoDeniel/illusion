@@ -19,9 +19,9 @@ import br.com.illusion.repository.ClientRepository;
 @Component
 public class AddressDAO implements DAO {
 
-  @Autowired private ClientRepository clientRepository;
-
   @Autowired private AddressRepository addressRepository;
+
+  @Autowired private ClientRepository clientRepository;
 
   @Override
   public String delete(final Domain domain) {

@@ -51,4 +51,7 @@ public class Client extends Domain implements Serializable {
 
   @OneToMany(mappedBy = "client")
   private List<Address> Addresses;
+
+  @OneToMany(mappedBy = "client")
+  private List<CreditCard> creditCards;
 }
